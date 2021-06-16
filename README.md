@@ -1,24 +1,42 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+＃＃usersテーブル(ユーザー情報)
 
-Things you may want to cover:
+| Column             | Type    | Options                       |
+| ------------------ | ------- | ----------------------------- |
+| nickname           | string  | null: false                   |
+| email              | string  | null: false, unique: true     |
+| encrypted_password | string  | null: false                   |
+| family_name        | string  | null: false                   |
+| first_name         | string  | null: false                   |
+| family_name_kana   | string  | null: false                   |
+| first_name_kana    | string  | null: false                   |
+| birth_day          | date    | null: false                   |
 
-* Ruby version
+Association
+has_many :breakfasts
+has_many :dinner
 
-* System dependencies
+##breakfastテーブル(朝ごはん情報)
 
-* Configuration
+| Column        | Type      | Options                        |
+| ------------- | --------- | ------------------------------ |
+| cooking_name  | string    | null:false                     |
+| menu          | text      | null:false                     |
+| name          | string    | null:false                     |
+| user          | reference | null: false, foreign_key: true |
 
-* Database creation
+Association
+belongs_to :user
 
-* Database initialization
+##dinnerテーブル(夜ご飯情報)
 
-* How to run the test suite
+| Column        | Type      | Options                        |
+| ------------- | --------- | ------------------------------ |
+| cooking_name  | string    | null:false                     |
+| menu          | text      | null:false                     |
+| name          | string    | null:false                     |
+| user          | reference | null: false, foreign_key: true |
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Association
+belongs_to :user
